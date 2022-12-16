@@ -3,7 +3,7 @@
  * @Author: 曹俊
  * @Date: 2022-12-12 18:00:18
  * @LastEditors: 曹俊
- * @LastEditTime: 2022-12-16 22:45:34
+ * @LastEditTime: 2022-12-17 00:52:57
 -->
 
 <template>
@@ -16,13 +16,13 @@
                 </div>
             </div>
         </div>
-        <div @click="toParse" class="mt-5"><el-button type="primary">解析文件</el-button></div>
+        <div @click="toParse" class="mt-5"><el-button type="primary" :disabled="disabled">解析文件</el-button></div>
     </div>
 
 </template>
 <script setup lang="ts">
 import { useRouter, useRoute } from 'vue-router'
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, ref } from "vue";
 const router = useRouter()
 const route = useRoute()
 const state = reactive({
@@ -31,6 +31,7 @@ const state = reactive({
 const render = (content: any) => {
     state.data = content
 }
+let disabled = ref(true)
 const toParse = () => {
     console.log('111');
 
@@ -45,6 +46,10 @@ const main = () => {
     let doc = document.getElementById("document") as any;
     doc.addEventListener("change", handleFileSelect, false);
 
+    const disable = () => {
+        disabled.value = false
+    }
+    doc.addEventListener("change", disable, false);
     const containerDiv = document.getElementById('output') as any;
     containerDiv.style.display = "none";
 
