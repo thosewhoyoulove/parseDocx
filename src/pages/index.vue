@@ -3,7 +3,7 @@
  * @Author: 曹俊
  * @Date: 2022-12-16 22:32:40
  * @LastEditors: 曹俊
- * @LastEditTime: 2022-12-16 22:38:02
+ * @LastEditTime: 2022-12-17 00:27:58
 -->
 <script setup lang="ts">
 import Main from '../components/Main.vue';
@@ -13,6 +13,7 @@ import Main from '../components/Main.vue';
 
     <div class="w-100vw h-100vh">
         <Main></Main>
+        <router-view></router-view>
     </div>
 
 </template>

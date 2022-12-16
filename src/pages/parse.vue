@@ -1,29 +1,42 @@
 <template>
     <div class="w-100vw h-100vh pt-5">
+        <div v-for="(item, index) in data" :key="index">
 
-        <div
-            class="flex w-20 h-20 bg-hex-5F9CEF border rounded-xl my-0 mx-auto text-hex-fff items-center justify-center">
-            day
-        </div>
-        <div class="flex dashed-line text-center"></div>
-        <div class=" border border-hex-5F9CEF mx-4 my-1">
-            <div class="flex w-100% bg-hex-5F9CEF h-10 text-center items-center justify-center text-hex-fff">todo</div>
-            <div class="text-xs p-3">
-                <div class="flex">time</div>
-                <div class="flex">place</div>
+            <div
+                class="flex w-20 h-20 bg-hex-5F9CEF border rounded-xl my-0 mx-auto text-hex-fff items-center justify-center">
+                {{ item.day }}
             </div>
+            <div class="flex dashed-line text-center"></div>
+            <div v-for="it in item?.children" class=" border border-hex-5F9CEF mx-4 my-1">
+                <div class="flex w-100% bg-hex-5F9CEF h-10 text-center items-center justify-center text-hex-fff">
+                    {{ it?.todo }}
+                </div>
+                <div class="text-xs p-3">
+                    <div class="flex mb-2 items-center "><img class="bg-hex-5F9CEF h-5 w-5" src="../../public/time.png"
+                            alt="">
+                        <div class="ml-2">
+                            {{ it?.time }}
+                        </div>
+                    </div>
+                    <div class="flex items-center"><img class="bg-hex-5F9CEF h-5 w-5" src="../../public/space.png"
+                            alt="">
+                        <div class="ml-2">{{ it?.place }}</div>
+                    </div>
+                </div>
 
-            <div class="flex rectangle">
-                <div class="absolute w-0 h-0 triangle right-0"></div>
-                <div class="flex text-xs text-hex-fff items-center justify-center ml-1">相关信息</div>
-            </div>
-            <div class="text-xs p-3">
-                <div class="flex mb-2">主持人：host</div>
-                <div class="flex mb-2">准备单位：preparationUnit</div>
-                <div class="flex">参加单位或人员：participants</div>
+                <div class="flex rectangle">
+                    <div class="absolute w-0 h-0 triangle right-0"></div>
+                    <div class="flex text-xs text-hex-fff items-center justify-center ml-1">相关信息</div>
+                </div>
+                <div class="text-xs p-3">
+                    <div class="flex mb-2">主持人：{{ it?.host }}</div>
+                    <div class="flex mb-2">准备单位：{{ it?.preparationUnit }}</div>
+                    <div class="flex text-left">参加单位或人员：{{ it?.participants }}</div>
+                </div>
             </div>
         </div>
     </div>
+
 </template>
 
 <script setup lang="ts">
