@@ -3,36 +3,48 @@
  * @Author: 曹俊
  * @Date: 2022-12-12 18:00:18
  * @LastEditors: 曹俊
- * @LastEditTime: 2022-12-15 18:09:01
+ * @LastEditTime: 2022-12-16 22:40:01
 -->
-
-<template>
-  <div class="container">
-    <input id="document" type="file" />
-    <div class="row">
-      <div class="span8">
-        <div id="output" class="well"></div>
-      </div>
-    </div>
-  </div>
-</template>
 <script setup lang="ts">
-import mammoth from "mammoth";
-import { onMounted } from "vue";
-// import Demo from "./api/bug.js";
-// const data = Demo();
-// console.log(data, "data");
+
+
+</script>
+<template>
+  <RouterView></RouterView>
+</template>
+
+<!-- <script setup lang="ts">
+import { useRouter, useRoute } from 'vue-router'
+import { onMounted, reactive } from "vue";
+const router = useRouter()
+const route = useRoute()
+const state  = reactive({
+  data:[]
+})
+const render = (content:any) => {
+    state.data = content
+}
+const toParse = () =>{
+  console.log('111');
+  
+  router.push({
+    path:'/src/pages/parse',
+    query:{
+      data:state.data
+    }
+  })
+}
 const main = () => {
   let doc = document.getElementById("document") as any;
   doc.addEventListener("change", handleFileSelect, false);
-  doc.addEventListener("change", () => {
-    const containerDiv = document.querySelector("div.container") as any;
+ 
+    const containerDiv = document.getElementById('output') as any;
     containerDiv.style.display = "none";
-  });
+ 
 
   function handleFileSelect(event: any) {
     readFileInputEventAsArrayBuffer(event, function (arrayBuffer: any) {
-      mammoth.convertToHtml({ arrayBuffer: arrayBuffer }).then(displayResult).done();
+      mammoth.convertToHtml({ arrayBuffer: arrayBuffer }).then(displayResult);
     });
   }
 
@@ -58,7 +70,7 @@ const main = () => {
 
       for (let j = 0; j < cells.length; j++) {
         // 获取单元格中的内容
-        const cellContent = cells[j].innerHTML;
+        const cellContent = cells[j].children[0].innerText;
 
         // 将单元格中的内容添加到行数组中
         rowData.push(cellContent);
@@ -69,8 +81,33 @@ const main = () => {
     }
 
     // 输出表格中的内容
-    console.log(tableData);
-
+    console.log(tableData, 'tempbo');
+    let temp = tableData.reduce((pre, cur) => {
+      if(cur.length === 7) {
+        return [...pre, {day: cur[0], children: [cur.slice(1)]}]
+      } else {
+        pre[pre.length - 1].children.push(cur)
+        return pre
+      }
+    }, [])
+  console.log(temp, 'ttt2')
+    temp.forEach(item => {
+      console.log('1111')
+      item.children = item.children.map(i => {
+        console.log('22222')
+        return {
+          time: i[0],
+          place: i[1],
+          todo: i[2],
+          host: i[3],
+          participants: i[4],
+          preparationUnit: i[5]
+        }
+      })
+    })
+    console.log(temp, 'temp')
+    
+    render(tableData);
     var messageHtml = result.messages
       .map(function (message: any) {
         return (
@@ -104,7 +141,14 @@ const main = () => {
       .replace(/>/g, "&gt;");
   }
 };
-// main();
+onMounted(() => {
+  main();
+});
 </script>
 
-<style scoped></style>
+<style scoped>
+#id{
+  color: aliceblue;
+  font-size: .5rem;
+}
+</style> -->

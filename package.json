@@ -11,7 +11,9 @@
   "dependencies": {
     "element-plus": "^2.2.26",
     "mammoth": "^1.5.1",
-    "vue": "^3.2.45"
+    "stream": "^0.0.2",
+    "vue": "^3.2.45",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
@@ -19,6 +21,9 @@
     "unplugin-auto-import": "^0.12.1",
     "unplugin-vue-components": "^0.22.12",
     "vite": "^4.0.0",
-    "vue-tsc": "^1.0.11"
+    "vite-plugin-pages": "^0.28.0",
+    "vite-plugin-windicss": "^1.8.10",
+    "vue-tsc": "^1.0.11",
+    "windicss": "^3.5.6"
   }
 }
