@@ -3,20 +3,22 @@
  * @Author: 曹俊
  * @Date: 2022-12-12 18:00:18
  * @LastEditors: 曹俊
- * @LastEditTime: 2022-12-17 00:52:57
+ * @LastEditTime: 2022-12-17 15:08:31
 -->
 
 <template>
-    <div class="flex-col w-100vw h-100vh pt-20">
+    <div class="flex w-100vw h-100vh pt-20 justify-center">
         <div class="text-sm">
-            <input class="bg-hex-ddd" id="document" type="file" />
-            <div class="row">
+            <input class="bg-hex-ddd relative" id="document" type="file" accept=".docx" />
+            <p class="absolute text-hex-f00 text-xs mt-2">*只能解析.docx文件</p>
+            <div class="flex">
                 <div class="span8">
                     <div id="output" class="well"></div>
                 </div>
             </div>
         </div>
-        <div @click="toParse" class="mt-5"><el-button type="primary" :disabled="disabled">解析文件</el-button></div>
+        <div @click="toParse(disabled)" class="flex ml-5"><el-button type="primary" size="small"
+                :disabled="disabled">解析文件</el-button></div>
     </div>
 
 </template>
@@ -32,15 +34,19 @@ const render = (content: any) => {
     state.data = content
 }
 let disabled = ref(true)
-const toParse = () => {
+const toParse = (disabled: any) => {
     console.log('111');
+    if (!disabled) {
+        console.log('可以跳转');
 
-    router.push({
-        path: '/parse',
-        query: {
-            data: JSON.stringify(state.data)
-        }
-    })
+        router.push({
+            path: '/parse',
+            query: {
+                data: JSON.stringify(state.data)
+            }
+        })
+    }
+
 }
 const main = () => {
     let doc = document.getElementById("document") as any;
@@ -93,7 +99,7 @@ const main = () => {
         }
 
         // 输出表格中的内容
-        console.log(tableData, 'tempbo');
+        console.log(tableData, 'temp');
         let temp = tableData.reduce((pre, cur) => {
             if (cur.length === 7) {
                 return [...pre, { day: cur[0], children: [cur.slice(1)] }]
@@ -159,9 +165,6 @@ onMounted(() => {
 </script>
   
 <style scoped>
-#id {
-    color: aliceblue;
-    font-size: .5rem;
-}
+
 </style>
   

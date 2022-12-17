@@ -1,5 +1,12 @@
+<!--
+ * @Description: 
+ * @Author: 曹俊
+ * @Date: 2022-12-16 17:49:11
+ * @LastEditors: 曹俊
+ * @LastEditTime: 2022-12-17 15:04:21
+-->
 <template>
-    <div class="w-100vw h-100vh pt-5">
+    <div class=" h-100vh pt-5">
         <div v-for="(item, index) in data" :key="index">
 
             <div
