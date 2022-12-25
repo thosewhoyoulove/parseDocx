@@ -3,7 +3,7 @@
  * @Author: 曹俊
  * @Date: 2022-12-12 18:00:18
  * @LastEditors: 曹俊
- * @LastEditTime: 2022-12-25 10:53:08
+ * @LastEditTime: 2022-12-25 11:32:26
 -->
 
 <template>
@@ -113,8 +113,7 @@ const main = () => {
         }, [])
         console.log(temp, 'temp')
         temp.forEach(item => {
-
-            item.children = item.children.map(i => {
+            item.children = item.children.map((i: any) => {
 
                 return {
                     time: i[0],
