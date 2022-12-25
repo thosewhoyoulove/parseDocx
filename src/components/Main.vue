@@ -3,7 +3,7 @@
  * @Author: 曹俊
  * @Date: 2022-12-12 18:00:18
  * @LastEditors: 曹俊
- * @LastEditTime: 2022-12-17 15:08:31
+ * @LastEditTime: 2022-12-25 10:53:08
 -->
 
 <template>
@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import { useRouter, useRoute } from 'vue-router'
 import { onMounted, reactive, ref } from "vue";
+import { saveAs } from 'file-saver';
 const router = useRouter()
 const route = useRoute()
 const state = reactive({
@@ -32,6 +33,8 @@ const state = reactive({
 })
 const render = (content: any) => {
     state.data = content
+    // let data = JSON.stringify(state.data);
+    // saveAs(new Blob([data], { type: 'application/json' }), 'data.json');存为JSON
 }
 let disabled = ref(true)
 const toParse = (disabled: any) => {
@@ -72,7 +75,7 @@ const main = () => {
         outputElement.innerHTML = result.value;
         const tableElement = outputElement.querySelector("table");
         const tbodyElement = tableElement.querySelector("tbody");
-        console.log(tbodyElement, "tbodyElement");
+        // console.log(tbodyElement, "tbodyElement");
         // 获取表格中的每一行
         const rows = tbodyElement.getElementsByTagName("tr");
 
@@ -81,14 +84,14 @@ const main = () => {
 
         for (let i = 0; i < rows.length; i++) {
             // 获取每一行的所有单元格
-            const cells = rows[i].getElementsByTagName("td");
+            const cells = rows[i].querySelectorAll("td");
 
             // 定义一个数组，用来保存每一行的内容
             const rowData = [];
 
             for (let j = 0; j < cells.length; j++) {
                 // 获取单元格中的内容
-                const cellContent = cells[j].children[0].innerText;
+                const cellContent = cells[j].innerText;
 
                 // 将单元格中的内容添加到行数组中
                 rowData.push(cellContent);
@@ -108,11 +111,11 @@ const main = () => {
                 return pre
             }
         }, [])
-        console.log(temp, 'ttt2')
+        console.log(temp, 'temp')
         temp.forEach(item => {
-            console.log('1111')
+
             item.children = item.children.map(i => {
-                console.log('22222')
+
                 return {
                     time: i[0],
                     place: i[1],
