@@ -3,26 +3,27 @@
  * @Author: 曹俊
  * @Date: 2022-12-16 17:49:11
  * @LastEditors: 曹俊
- * @LastEditTime: 2022-12-17 15:04:21
+ * @LastEditTime: 2022-12-25 10:50:41
 -->
 <template>
     <div class=" h-100vh pt-5">
         <div v-for="(item, index) in data" :key="index">
 
             <div
-                class="flex w-20 h-20 bg-hex-5F9CEF border rounded-xl my-0 mx-auto text-hex-fff items-center justify-center">
+                class="flex w-50 h-20 bg-hex-5F9CEF border rounded-xl my-0 mx-auto text-hex-fff items-center justify-center">
                 {{ item.day }}
             </div>
             <div class="flex dashed-line text-center"></div>
             <div v-for="it in item?.children" class=" border border-hex-5F9CEF mx-4 my-1">
-                <div class="flex w-100% bg-hex-5F9CEF h-10 text-center items-center justify-center text-hex-fff">
+                <div
+                    class="flex w-100% bg-hex-5F9CEF h-15 text-center items-center justify-center text-hex-fff font-600">
                     {{ it?.todo }}
                 </div>
                 <div class="text-xs p-3">
                     <div class="flex mb-2 items-center "><img class="bg-hex-5F9CEF h-5 w-5" src="../../public/time.png"
                             alt="">
                         <div class="ml-2">
-                            {{ it?.time }}
+                            {{ item.day.slice(6) }} {{ it?.time }}
                         </div>
                     </div>
                     <div class="flex items-center"><img class="bg-hex-5F9CEF h-5 w-5" src="../../public/space.png"
@@ -48,11 +49,20 @@
 
 <script setup lang="ts">
 import { useRouter, useRoute } from 'vue-router'
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, ref } from "vue";
+
+import { decompressFromEncodedURIComponent as decode, compressToEncodedURIComponent as encode } from 'lz-string'
 const route = useRoute()
 let data = JSON.parse(route.query.data)
+let encodedUrl = ref()
+let decodedUrl = ref()
 onMounted(() => {
     console.log(data, '传过来的数据')
+
+    encodedUrl.value = encode(window.location.search)
+
+    decodedUrl.value = decode(encodedUrl.value)
+    console.log(decodedUrl.value, 'decodedUrl.value');
 })
 </script>
 
