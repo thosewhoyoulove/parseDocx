@@ -3,7 +3,7 @@
  * @Author: 曹俊
  * @Date: 2022-12-12 18:00:18
  * @LastEditors: 曹俊
- * @LastEditTime: 2022-12-16 18:04:35
+ * @LastEditTime: 2022-12-26 23:28:47
  */
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -23,4 +23,4 @@ export default defineConfig({
     resolvers: [ElementPlusResolver()],
   }),],
 
-})
+},)
