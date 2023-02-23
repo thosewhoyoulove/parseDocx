@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "rimraf docs && vite build",
+        "build": "rimraf docs && vite build --outDir docs",
         "preview": "vite preview"
     },
     "dependencies": {
