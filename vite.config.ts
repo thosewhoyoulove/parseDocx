@@ -3,7 +3,7 @@
  * @Author: 曹俊
  * @Date: 2022-12-12 18:00:18
  * @LastEditors: 曹俊
- * @LastEditTime: 2023-03-05 23:41:11
+ * @LastEditTime: 2023-03-15 20:53:20
  */
 import { defineConfig } from 'vite'
 import path from 'path'
@@ -16,7 +16,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: './',
+  base: '/parseDocx/',
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
